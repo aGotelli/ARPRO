@@ -1,12 +1,14 @@
 # ARPRO
 
-This public repository is intended to have all the code we create during the lab.
+This public repository is intended to have all the code we create during the labs.
 
 In order to download the code you can run the this command where you this repository.
 
       git clone https://github.com/aGotelli/ARPRO.git
 
 This folder is divided into two branches: s1_s2 and s3, accordingly to you schedule in OnBoard where group one and two are always together and group three is alone.
+
+As such, the two branches contains different code that we write during the two independent lab sessions.
 
 In order to see the code in the correct branch, open a terminal in the ARPRO repository and run the command
 
@@ -17,7 +19,7 @@ Where you will replace "your branch" with s1_s2 or s3.
 
 ## What you can do
 
-Use this code to check if you missed something during the lab.
+Use this code to check if you missed something during the labs.
 
 Open an issue if something is not clear to you or you would like to discuss a solution.
 
@@ -38,4 +40,4 @@ Do not take this as a replacement for the lab. If I notice that students are mis
 
 Setting the git environment is easy but I cannot take the time to explain it to you during the labs, as I already have many topics to cover. If you have problem using this repository ask your colleagues or leave it.
 
-The usage of this repository is not mandatory. The goal of the labs is to introduce you to C++ and not git. Paying attention during the lectures and doing exercises will be more than enough. 
+The usage of this repository is not mandatory. The goal of the labs is to introduce you to C++ and not git. Paying attention during the lectures and doing exercises will be more than enough.
