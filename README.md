@@ -12,9 +12,9 @@ As such, the two branches contains different code that we write during the two i
 
 In order to see the code in the correct branch, open a terminal in the ARPRO repository and run the command
 
-    git checkout "your branch"
+    git checkout your_branch
 
-Where you will replace "your branch" with s1_s2 or s3.
+Where you will replace your_branch with s1_s2 or s3.
 
 
 ## What you can do
