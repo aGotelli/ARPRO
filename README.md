@@ -1,43 +1,60 @@
 # ARPRO
 
-This public repository is intended to have all the code we create during the labs.
+In this branch there is a little tutorial on how to set up a new project from scratch using Qt Creator.
 
-In order to download the code you can run the this command where you this repository.
+### Start Qt Creator
+First, we need to start Qt Creator, you should be by default on the Welcome section. The sections are on the left, the first one is the welcome section with the 9 aligned squares.
+![](images/start_qt.png)
 
-      git clone https://github.com/aGotelli/ARPRO.git
+### Create a new Project
+Once there you need to select the file section and then "New File or Project", as shown in the image below.
+![](images/new_project.png)
 
-This folder is divided into two branches: s1_s2 and s3, accordingly to you schedule in OnBoard where group one and two are always together and group three is alone.
+Once selected the "New File or Project" a window will pop up, use it to create the specifications of your project.
 
-As such, the two branches contains different code that we write during the two independent lab sessions.
+First, you need to specify which kind of project you want to create. In our labs, we only use C++ so select the section ; "Non-Qt Project" and then "Plain C++ Application". You can then go to the next section.
+![](images/cpp_app.png)
 
-In order to see the code in the correct branch, open a terminal in the ARPRO repository and run the command
+### Place your project <a name="proj_loc"></a>
+![](images/project_name.png)
+Name your project as you want. Here I used the name "your_project". Note that if you want to use more words you must space them with the underscore "_".
+You then need to select where to put your project. Select a meaningful folder which you can also set as default. If you set the folder as default, the next time you won't have to select it again.
 
-    git checkout your_branch
 
-Where you will replace your_branch with s1_s2 or s3.
+### Select your build system
+It is now time to select the build system we use. In our labs, we only use the CMake command so you need to select it as shown in the image below.
 
+![](images/set_CMake.png)
 
-## What you can do
+Then, you can go on the next section.
 
-Use this code to check if you missed something during the labs.
+### Select the proper kit
+You know have to select the kit you'll use to build your project.
+First make sure to check only the Desktop checkbox.
+![](images/select_desktop_kit.png)
 
-Open an issue if something is not clear to you or you would like to discuss a solution.
+Then, click to details and make sure only the checkbox of Default is selected.
+![](images/select_default.png)
 
-If you don't know how to open an issue: https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue
+You know need to specify the location where the compiled and build files will be generated. Be careful in this choice. It is common practice to have, in your project folder, a sub-folder named "build" which contains all these files.
 
-You could also try to finish the exercise we started during the lab and then we discuss the implementation in class, leaving the author anonymous.
+You may want to follow this suggestion, and you only need to click on the "Browse..." button on the right and select the same path as the one you choose when you [specified the location of your project](#proj_loc).
+![](images/select_same_path.png)
 
-This can be achieved committing the code (which is different from opening an issue).
+Now in order to have the generated files inside the sub-folder "build" add the following to the path of the Default build location
 
-If you don't know hot to commit some code:
-https://github.com/git-guides/git-commit
+      /your_project/build
 
-Note that all the above can be simply handled with a proper GUI such as: https://www.gitkraken.com/
+Where you replace "your_project" with the name you choose. The result should be similar to the one shown in the image below.
+![](images/add_extension.png)
 
-## What you ABSOLUTELY cannot do
+### End
+You will now be prompt to the Summary section. Nothing to do here, your project is ready.
 
-Do not take this as a replacement for the lab. If I notice that students are missing, I will simply delete the repository.
+![](images/project_done.png)
 
-Setting the git environment is easy but I cannot take the time to explain it to you during the labs, as I already have many topics to cover. If you have problem using this repository ask your colleagues or leave it.
+You can press on finish and have your project created.
 
-The usage of this repository is not mandatory. The goal of the labs is to introduce you to C++ and not git. Paying attention during the lectures and doing exercises will be more than enough.
+![](images/int_main.png)
+
+Now that your project is done, if you go to the CMakeLists.txt file, you will notice some differences from the one we write during the lab. It is not a problem, Qt Creator generates some parameters that we actually do not need for the moment but will not do any harm in being there. 
