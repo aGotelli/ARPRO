@@ -2,7 +2,7 @@
 
 This public repository is intended to have all the code we create during the labs.
 
-In order to download the code you can run the this command where you this repository.
+In order to download the code you can run the this command where you want to have this repository.
 
       git clone https://github.com/aGotelli/ARPRO.git
 
