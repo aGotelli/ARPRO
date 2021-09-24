@@ -24,6 +24,7 @@ private:
      */
     std::array<std::array<unsigned int, 10>, 10> player_grid;
 
+
     std::vector<std::pair<unsigned int,
     unsigned int>> placeBoatRandomly(const unsigned int boat_length);
 };
