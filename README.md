@@ -33,7 +33,7 @@ You know have to select the kit you'll use to build your project.
 First make sure to check only the Desktop checkbox.
 ![](images/select_desktop_kit.png)
 
-Then, click to details and make sure only the checkbox of Default is selected.
+Then, click to details and make sure only the checkbox of Default is selected. If you don't have the Default option, use the Debug instead.
 ![](images/select_default.png)
 
 You know need to specify the location where the compiled and build files will be generated. Be careful in this choice. It is common practice to have, in your project folder, a sub-folder named "build" which contains all these files.
