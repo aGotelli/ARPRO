@@ -21,8 +21,13 @@ struct Box {
     bool hit { false };
     BoxContent content { BoxContent::SEA };
 
-    char displayBoxContent()const
+    char displayBoxContent()
     {
+        //  If box was hit, return a specific marker
+        if(hit)
+            return 'X';
+
+        //  Otherwise continue with the switch cases
         switch (content) {
             case BoxContent::AIRCRAFT :
                 return 'A';

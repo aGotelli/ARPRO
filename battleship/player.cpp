@@ -9,8 +9,9 @@ unsigned int getRandomInteger(const unsigned int limit)
     // then you divide this big random integer by limit.
     // The rest can only be between 0 and limit
 }
-
-Player::Player()
+                //  Use the parameter that is passed to initialize the
+                //  member variable which indicates if the player is human or no
+Player::Player(bool human) : is_human(human)
 {
     //  Create a list with all the boats we need to place
     std::vector<std::pair<BoxContent,
@@ -104,8 +105,18 @@ Player::Player()
 }
 
 
-void Player::displaPlayerGrid()
+void Player::displaPlayerGrid(Player other)
 {
+    //  If the player is not human this function just exit directly
+    //  and we do not print the two grids
+    if(!is_human)
+        return;
+
+
+    std::cout << "  ";
+    for (unsigned int col=0;col<10;col++) {
+        std::cout << col << " ";
+    }
     std::cout << "  ";
     for (unsigned int col=0;col<10;col++) {
         std::cout << col << " ";
@@ -114,11 +125,52 @@ void Player::displaPlayerGrid()
     std::cout << std::endl;
 
     for (unsigned int row=0;row<10;row++) {
+        //  Print grid line for player 1
         std::cout << row << " ";
+        printGridLine(row);
 
-        for (unsigned int col=0;col<10;col++) {
-            std::cout << player_grid[row][col].displayBoxContent() << " ";
-        }
+        //  Print grid line for plater 2
+        std::cout << row << " ";
+        other.printGridLine(row);
+
+
         std::cout << std::endl;
     }
+}
+
+void Player::printGridLine(const unsigned int row)
+{
+    for (unsigned int col=0;col<10;col++) {
+        std::cout << player_grid[row][col].displayBoxContent() << " ";
+    }
+}
+
+void Player::shootPlayer(Player &opponent)
+{
+    unsigned int row(0), col(0);
+
+    //  Add the condition for shooting
+    if(is_human){
+        //  Get the row and col from terminal
+        std::cout << std::endl << "I want to shoot at [row, col] ";
+        std::cin >> row >> col;
+    } else {
+        //  We generate it randomly
+        row = getRandomInteger(10);
+        col = getRandomInteger(10);
+    }
+
+    std::cout << std::endl;
+    std::cout << "I shoot at [row, col] : [" << row << ", " << col << "]" << std::endl;
+
+    //  In order to change the value to the gird player we cannot take it as a copy
+    //  We need to reference the content of the opponent direcly
+    opponent.player_grid[row][col].hit = true;
+
+    //  Check the content of the opponent grid
+    if(opponent.player_grid[row][col].content == BoxContent::SEA)
+        std::cout << "You missed it!" << std::endl;
+
+    displaPlayerGrid(opponent);
+
 }

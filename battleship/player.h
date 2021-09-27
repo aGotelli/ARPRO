@@ -11,12 +11,20 @@ class Player
 {
 public:
     //  Constructor
-    Player();
+    Player(bool human=true);
 
     //  This is the function declaration
-    void displaPlayerGrid();
+    void displaPlayerGrid(Player other);
 
     std::array<std::array<Box, 10>, 10> player_grid;
+
+    void printGridLine(const unsigned int row);
+
+    void shootPlayer(Player& opponent);
+
+    //  Add the default initialized flag
+    //  We want to create an human player and a computer-player
+    bool is_human { true };
 
 
 };
