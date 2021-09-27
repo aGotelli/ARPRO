@@ -1,6 +1,7 @@
 # ARPRO
 
-This public repository is intended to have all the code we create during the labs.
+This public repository is intended to have all the code we create during the C++ labs.
+For questions about the course you can reach me at: Andrea.Gotelli@eleves.ec-nantes.fr
 
 In order to download the code you can run the this command where you want to have this repository.
 
