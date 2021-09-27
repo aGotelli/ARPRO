@@ -3,11 +3,11 @@
 
 int main()
 {
-    srand(time(nullptr));
+    srand( static_cast<unsigned int>(time(nullptr)) );
 
-    Player test_player;
+    Player player1;
 
-    test_player.displaPlayerGrid();
+    player1.displaPlayerGrid();
 
 
 

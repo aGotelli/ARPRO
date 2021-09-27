@@ -21,7 +21,7 @@ struct Box {
     bool hit { false };
     BoxContent content { BoxContent::SEA };
 
-    char displayBoxContent()
+    char displayBoxContent()const
     {
         switch (content) {
             case BoxContent::AIRCRAFT :
