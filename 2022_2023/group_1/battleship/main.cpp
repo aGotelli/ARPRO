@@ -33,13 +33,14 @@ void printGrid(std::vector<std::vector<Cell>> board)
 int main()
 {
 
-    srand(1);
+    srand(8);
 
 
-    Player player;
+    Player player_1;
+    Player player_2;
 
 
-    printGrid(player.board);
+    printGrid(player_1.board);
 
 
 
