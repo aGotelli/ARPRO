@@ -33,7 +33,7 @@ void printGrid(std::vector<std::vector<Cell>> board)
 int main()
 {
 
-    srand(8);
+    srand(time(nullptr));
 
 
     Player player_1;

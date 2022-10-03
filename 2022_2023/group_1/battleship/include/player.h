@@ -21,9 +21,7 @@ struct Player {
             board.push_back(row);
         }
 
-        for(int boat_length : boats_length){
-
-            bool boat_is_vertical = static_cast<bool>( rand() % 2 );
+        for(auto ship : fleet){
 
             bool replace = true;
 
@@ -34,22 +32,22 @@ struct Player {
 
                 replace =false;
 
-                if(boat_is_vertical){
-                    start_row = rand() % (10 - (boat_length - 1));
+                if(ship.is_vertical){
+                    start_row = rand() % (10 - (ship.length - 1));
                     start_col = rand() % 10;
                 }else{
                     start_row = rand() % 10;
-                    start_col = rand() % (10 - (boat_length - 1));
+                    start_col = rand() % (10 - (ship.length - 1));
                 }
 
 
-                for(int i =0; i<boat_length; i++){
+                for(int i =0; i<ship.length; i++){
 
-                    if(boat_is_vertical) {
-                        if(board[start_row+i][start_col].content != 0)
+                    if(ship.is_vertical) {
+                        if(board[start_row+i][start_col].content != Content::SEA)
                             replace = true;
                     }else{
-                        if(board[start_row][start_col+i].content != 0)
+                        if(board[start_row][start_col+i].content != Content::SEA)
                             replace = true;
                     }
 
@@ -58,12 +56,12 @@ struct Player {
             }
 
 
-            if(boat_is_vertical){
-                for(int i =0; i<boat_length; i++)
-                    board[start_row+i][start_col].content = 1;
+            if(ship.is_vertical){
+                for(int i =0; i<ship.length; i++)
+                    board[start_row+i][start_col].content = ship.type;
             }else{
-                for(int i =0; i<boat_length; i++)
-                    board[start_row][start_col+i].content = 1;
+                for(int i =0; i<ship.length; i++)
+                    board[start_row][start_col+i].content = ship.type;
             }
 
         }
@@ -91,7 +89,7 @@ struct Player {
 
         }
 
-        if(opponent.board[row][col].content == 0)
+        if(opponent.board[row][col].content == Content::SEA)
             std::cout << "Hit the sea" << std::endl;
         else{
             opponent.life_points--;
@@ -106,15 +104,18 @@ struct Player {
 
     }
 
-
-    std::vector<int> boats_length {
-        2, 3, 3, 4, 5
+    std::vector<Ship> fleet {
+        Ship(5, Content::AIRCRAFT),
+        Ship(3, Content::DESTROYER),
+        Ship(4, Content::SUBMARINE),
+        Ship(2, Content::CRUISE)
     };
 
     int life_points {
-        std::accumulate(boats_length.begin(),
-                        boats_length.end(),
-                        0)
+        std::accumulate(fleet.begin(),
+                        fleet.end(),
+                        0, [](const Ship &ship){return ship.length;}
+                        )
     };
 
     std::vector<std::pair<unsigned int, unsigned int>> history;

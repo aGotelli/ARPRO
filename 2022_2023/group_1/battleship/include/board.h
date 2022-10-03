@@ -11,10 +11,35 @@
  *
  */
 
+#include <random>
+
+enum Content {
+    SEA,
+    DESTROYER,
+    AIRCRAFT,
+    SUBMARINE,
+    CRUISE
+};
+
+
+struct Ship {
+
+    Ship(unsigned int t_length,
+         Content t_type)
+        : length(t_length),
+          type(t_type)
+    {}
+
+    unsigned int length;
+    Content type;
+
+    bool is_vertical { static_cast<bool>( rand() % 2 ) };
+};
+
 struct Cell {
 
-
-    int content;
+    bool has_been_hit { false };
+    Content content;
 };
 
 
