@@ -23,6 +23,8 @@ struct Player {
 
         for(auto ship : fleet){
 
+            life_points += ship.length;
+
             bool replace = true;
 
             int start_row;
@@ -68,26 +70,35 @@ struct Player {
     }
 
 
-    void shootAtPlayer(Player &opponent)
+    bool shootAtPlayer(Player &opponent)
     {
-        unsigned int row = rand() % 10;
-        unsigned int col = rand() % 10;
+        unsigned int row;
+        unsigned int col;
+        if(is_human) {
+            std::cout << "Specify the coordinates : " << std::endl;
+            std::cin >> row >> col;
+            std::cout << std::endl;
+        } else {
+            row = rand() % 10;
+            col = rand() % 10;
 
-        bool generate_random_position = true;
-        while(generate_random_position){
-            generate_random_position = false;
+            bool generate_random_position = true;
+            while(generate_random_position){
+                generate_random_position = false;
 
-            if(std::find_if(history.begin(),
-                            history.end(),
-                            [&](std::pair<unsigned int, unsigned int> element){
-                            if(row == element.first || col == element.second)
-                                return true;
-                            else
-                                return false;
-                    }) != history.end())
-                generate_random_position = true;
+                if(std::find_if(history.begin(),
+                                history.end(),
+                                [&](std::pair<unsigned int, unsigned int> element){
+                                if(row == element.first || col == element.second)
+                                    return true;
+                                else
+                                    return false;
+                        }) != history.end())
+                    generate_random_position = true;
 
+            }
         }
+
 
         if(opponent.board[row][col].content == Content::SEA)
             std::cout << "Hit the sea" << std::endl;
@@ -99,8 +110,10 @@ struct Player {
                 std::make_pair(row, col)
                     );
 
+        if(opponent.life_points == 0)
+            return true;
 
-
+        return false;
 
     }
 
@@ -111,16 +124,13 @@ struct Player {
         Ship(2, Content::CRUISE)
     };
 
-    int life_points {
-        std::accumulate(fleet.begin(),
-                        fleet.end(),
-                        0, [](const Ship &ship){return ship.length;}
-                        )
-    };
+    int life_points { 0 };
 
     std::vector<std::pair<unsigned int, unsigned int>> history;
 
     std::vector<std::vector<Cell>> board;
+
+    bool is_human { true };
 };
 
 

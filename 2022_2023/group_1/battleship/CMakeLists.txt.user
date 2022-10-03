@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2022-10-03T14:55:01. -->
+<!-- Written by QtCreator 6.0.2, 2022-10-03T17:44:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -171,6 +171,7 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/andrea/Desktop/PhD/PhD_teaching/ARPRO/ARPRO/2022_2023/group_1/battleship/build</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>

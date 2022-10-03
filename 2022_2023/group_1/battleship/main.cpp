@@ -38,9 +38,31 @@ int main()
 
     Player player_1;
     Player player_2;
+    player_2.is_human = false;
+
+    while(true){
+
+        printGrid(player_1.board);
+
+        std::cout << "\n\n\n" << std::endl;
+
+        printGrid(player_2.board);
 
 
-    printGrid(player_1.board);
+
+        if(player_1.shootAtPlayer(player_2)){
+            std::cout << "Player 1 won!!! \n\n";
+            return 1;
+        }
+
+        if(player_2.shootAtPlayer(player_1)){
+            std::cout << "Player 2 won!!! \n\n";
+            return 2;
+        }
+
+    }
+
+
 
 
 
