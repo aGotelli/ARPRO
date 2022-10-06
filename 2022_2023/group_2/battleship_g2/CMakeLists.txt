@@ -7,4 +7,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(battleship_g2 main.cpp
     boat.h
+    player.h
 )

@@ -6,13 +6,13 @@
 
 struct Boat {
 
-    Boat(int t_type,
+    Boat(std::string t_type,
          int t_length)
         : type(t_type),
           length(t_length)
     {}
 
-    Boat(int t_type,
+    Boat(std::string t_type,
          int t_length,
          bool t_is_vertical)
         : type(t_type),
@@ -20,7 +20,7 @@ struct Boat {
           is_vertical(t_is_vertical)
     {}
 
-    const int type;
+    const std::string type;
     const int length;
     const bool is_vertical { static_cast<bool>(rand() % 2) };
 };
