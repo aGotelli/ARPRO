@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "player.hpp"
-
+#include "utility.hpp"
 
 
 
@@ -20,21 +20,7 @@
 
 
 
-void printGrid(const std::vector<std::vector<char>> t_grid)
-{
-    for(unsigned int row_index=0; row_index<t_grid.size(); row_index++){
-        auto grid_row = t_grid[row_index];
 
-        for(unsigned int col_index=0; col_index<grid_row.size(); col_index++){
-
-            char cell = grid_row[col_index];
-
-            std::cout << cell << " ";
-        }
-        std::cout << std::endl;
-    }
-
-}
 
 
 
@@ -45,17 +31,56 @@ void printGrid(const std::vector<std::vector<char>> t_grid)
 int main()
 {
 
-    Player player1;
+    Player player1("bot 1");
+    Player player2("bot 2");
 
-    printGrid( player1.m_grid );
 
-    std::cout << "\n\n\n";
 
 
     player1.placeShip();
+    player2.placeShip();
 
 
+    std::cout << "Grids player 1\n";
     printGrid( player1.m_grid );
+    printGrid( player1.m_opponent_grid );
+    std::cout << "\n";
+    std::cout << "Grids player 2\n";
+    printGrid( player2.m_grid );
+    printGrid( player2.m_opponent_grid );
+    std::cout << "\n\n";
+
+    bool keep_playing = true;
+    while(keep_playing){
+
+        player1.shootAtPlayer(player2);
+
+        if(player2.m_life_points == 0){
+            std::cout << "Player " << player1.m_ID << " won!";
+            return 0;
+        }
+
+        player2.shootAtPlayer(player1);
+
+        if(player1.m_life_points == 0){
+            std::cout << "Player " << player2.m_ID << " won!";
+            return 0;
+        }
+
+        std::cout << "Grids player 1\n";
+        printGrid( player1.m_grid );
+        printGrid( player1.m_opponent_grid );
+        std::cout << "\n";
+        std::cout << "Grids player 2\n";
+        printGrid( player2.m_grid );
+        printGrid( player2.m_opponent_grid );
+        std::cout << "\n\n";
+
+
+    }
+
+
+
 
 
     return 0;
