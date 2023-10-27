@@ -6,6 +6,8 @@
 #include <chrono>
 #include <iostream>
 
+using namespace std ;
+
 
 int getRandomInInterval(const int t_max)
 {
@@ -49,16 +51,12 @@ struct Player {
         for(unsigned it=0; it<m_grid_rows; it++)
             m_grid.push_back( row );
 
-
         for(unsigned int it=0; it<row.size(); it++){
             row[it] = '~';
         }
 
         for(unsigned it=0; it<m_grid_rows; it++)
             m_grid_hidden.push_back( row );
-
-
-
 
         //  Adding a destroyer of size 3
         Ship minesweeper('M', 1, getRandomInInterval(2)-1);
@@ -77,9 +75,6 @@ struct Player {
     }
 
 
-    virtual void getCoordinates(int &row, int &col, Ship &ship)=0;
-
-
     void fleetPlacement()
     {
         //  Instance of the ship to place
@@ -89,17 +84,19 @@ struct Player {
 
             int row_index, col_index;
 
-            getCoordinates(row_index, col_index, ship);
-
 
             if (ship.m_horizontal)
             {
+                row_index = getRandomInInterval(m_grid_rows - 1);
+                col_index = getRandomInInterval(m_grid_cols - ship.m_size);
+
 
                 while(check_space(row_index,
                                   col_index,
                                   ship.m_size,
                                   ship.m_horizontal) != true){
-                    getCoordinates(row_index, col_index, ship);
+                    row_index = getRandomInInterval(m_grid_rows - 1);
+                    col_index = getRandomInInterval(m_grid_cols - ship.m_size);
                 }
                 for(int it=0; it<ship.m_size; it++)
                     m_grid[row_index][col_index+it]=ship.m_ID;
@@ -107,11 +104,16 @@ struct Player {
 
                 } else {
 
+
+                row_index = getRandomInInterval(m_grid_rows - ship.m_size);
+                col_index = getRandomInInterval(m_grid_cols - 1);
+
                 while(check_space(row_index,
                                   col_index,
                                   ship.m_size,
                                   ship.m_horizontal) != true){
-                    getCoordinates(row_index, col_index, ship);
+                    row_index = getRandomInInterval(m_grid_rows - ship.m_size);
+                    col_index = getRandomInInterval(m_grid_cols - 1);
                 }
                 for(int it=0; it<ship.m_size; it++)
                     m_grid[row_index + it][col_index]=ship.m_ID;
@@ -135,6 +137,9 @@ struct Player {
         }
 
     }
+
+
+
 
 
     bool check_space(int t_row_index,
@@ -172,38 +177,8 @@ struct Player {
 
 
 
-struct Human : Player {
-
-    virtual void getCoordinates(int &row,
-                                int &col,
-                                Ship &ship) override
-    {
-        std::cout << "Row and Column and Direction for " << ship.m_ID << ": "<< std::endl;
-        std::cin >> row >> col >> ship.m_horizontal;
-    }
-
-};
 
 
-struct Bot : Player {
-
-    virtual void getCoordinates(int &row, int &col, Ship &ship) override
-    {
-
-        if(ship.m_horizontal){
-            row = getRandomInInterval(m_grid_rows - 1);
-            col = getRandomInInterval(m_grid_cols - ship.m_size);
-        }else {
-            row = getRandomInInterval(m_grid_rows - ship.m_size - 1);
-            col = getRandomInInterval(m_grid_cols - 1);
-        }
-
-
-    }
-
-
-
-};
 
 
 
