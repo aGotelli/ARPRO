@@ -141,9 +141,16 @@ struct Player {
 
     void printGrid()
     {
+
+        std::cout << "  ";
+        for(unsigned int i=0; i<m_grid_cols; i++)
+            std::cout << i << " ";
+        std::cout << "\n";
         for(unsigned int row_index=0; row_index<m_grid_rows; row_index++){
 
             const auto row = m_grid[row_index];
+
+            std::cout << row_index << " ";
 
             for(unsigned int col_index=0; col_index<m_grid_cols; col_index++)
                 std::cout << row[col_index]<<" ";
@@ -232,7 +239,6 @@ struct Bot : Player {
 
     virtual void getCoordinates(int &row, int &col, Ship &ship) override
     {
-
         if(ship.m_horizontal){
             row = getRandomInInterval(m_grid_rows - 1);
             col = getRandomInInterval(m_grid_cols - ship.m_size);
@@ -240,9 +246,9 @@ struct Bot : Player {
             row = getRandomInInterval(m_grid_rows - ship.m_size - 1);
             col = getRandomInInterval(m_grid_cols - 1);
         }
-
-
     }
+
+
     virtual std::pair<int, int> generateShootingCoordinates()override
     {
         int row;
