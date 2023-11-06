@@ -6,6 +6,8 @@
 #include <chrono>
 #include <iostream>
 
+#include <memory>
+
 
 int getRandomInInterval(const int t_max)
 {
@@ -137,6 +139,37 @@ struct Player {
     }
 
 
+    void printGrid()
+    {
+        for(unsigned int row_index=0; row_index<m_grid_rows; row_index++){
+
+            const auto row = m_grid[row_index];
+
+            for(unsigned int col_index=0; col_index<m_grid_cols; col_index++)
+                std::cout << row[col_index]<<" ";
+            std::cout << "\n";
+
+
+        }
+        std::cout << "\n"<< std::endl;
+    }
+
+
+    virtual std::pair<int, int> generateShootingCoordinates()=0;
+
+    void shooting(std::shared_ptr<Player> target)
+    {
+
+        auto [row, col] = generateShootingCoordinates();
+
+        /*check in the actual value of the grid*/
+        if(target->m_grid[row][col]=='~')
+            m_grid_hidden[row][col] = 'O';
+        else
+            m_grid_hidden[row][col] = 'X';
+    }
+
+
     bool check_space(int t_row_index,
                      int t_col_index,
                      int t_size,
@@ -174,16 +207,26 @@ struct Player {
 
 struct Human : Player {
 
+    virtual std::pair<int, int> generateShootingCoordinates()override
+    {
+        std::pair<int, int> location;
+
+        std::cout << "Row and Column for your shooting : "<< std::endl;
+        std::cin >> location.first >> location.second;
+
+        return location;
+    }
     virtual void getCoordinates(int &row,
                                 int &col,
                                 Ship &ship) override
     {
+        printGrid();
+
         std::cout << "Row and Column and Direction for " << ship.m_ID << ": "<< std::endl;
         std::cin >> row >> col >> ship.m_horizontal;
     }
 
 };
-
 
 struct Bot : Player {
 
@@ -199,6 +242,16 @@ struct Bot : Player {
         }
 
 
+    }
+    virtual std::pair<int, int> generateShootingCoordinates()override
+    {
+        int row;
+        int col;
+
+        row = getRandomInInterval(m_grid_rows - 1);
+        col = getRandomInInterval(m_grid_rows - 1);
+
+        return {row, col};
     }
 
 
