@@ -14,8 +14,7 @@
 
 struct Player {
 
-    Player(std::string t_player_ID)
-        : m_ID(t_player_ID)
+    Player()
     {
 
         //  Declare a vector of char
@@ -118,25 +117,15 @@ struct Player {
     }
 
 
+    virtual std::pair<int, int> shootAtCoord()=0;
+
 
     void shootAtPlayer(Player& t_opponent)
     {
         std::cout << "Player : " << m_ID << " shooting at ";
 
-
-        unsigned int row, col;
-
-        if(m_ID == "human"){
-            std::cout << "Enter a row : ";
-            std::cin >> row;
-            std::cout << "Enter a col : ";
-            std::cin >> col;
-        }else{
-            row = getRandomInt(number_of_rows-1);
-            col = getRandomInt(number_of_cols-1);
-        }
-
-
+        //  Get the coordinates for human/bot
+        const auto [row, col] = shootAtCoord();
 
         std::cout << "row:" << row << " col:" << col << "\n";
 
@@ -175,6 +164,37 @@ struct Player {
     unsigned int m_life_points;
 
 
+};
+
+
+
+struct Human : Player {
+
+    virtual std::pair<int, int> shootAtCoord() override
+    {
+        unsigned int row, col;
+
+        std::cout << "Enter a row : ";
+        std::cin >> row;
+        std::cout << "Enter a col : ";
+        std::cin >> col;
+
+        return {row, col};
+    }
+};
+
+
+struct Bot : Player {
+
+    virtual std::pair<int, int> shootAtCoord() override
+    {
+        unsigned int row, col;
+
+        row = getRandomInt(number_of_rows-1);
+        col = getRandomInt(number_of_cols-1);
+
+        return {row, col};
+    }
 };
 
 
