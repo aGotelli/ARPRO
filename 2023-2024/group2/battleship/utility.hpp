@@ -4,13 +4,10 @@
 #include <iostream>
 #include <vector>
 
-int getRandomInt(const unsigned int t_max)
-{
-    return rand() % (t_max + 1);
-}
+int getRandomInt(const unsigned int t_max);
 
 
-void printGrid(const std::vector<std::vector<char>> t_grid)
+static void printGrid(const std::vector<std::vector<char>> t_grid)
 {
     std::cout << "  ";
     for(unsigned int i=0; i<t_grid[0].size(); i++)
